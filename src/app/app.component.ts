@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import 'rxjs/add/operator/map';
+
+import { Component, ViewEncapsulation } from '@angular/core';
+import { Http , Response} from '@angular/http';
+
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+    <navbar></navbar>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  `
 })
 export class AppComponent {
-  title = 'app works!';
+
 }
