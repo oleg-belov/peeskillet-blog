@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { HomePageComponent } from './home/home-page.component';
@@ -26,5 +26,10 @@ import { appRoutes } from './routes';
   ]
 })
 export class PagesModule {
-
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: PagesModule,
+      providers: []
+    }
+  }
 }

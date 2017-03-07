@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { SharedModule } from '../shared';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -16,5 +16,10 @@ import { NavbarComponent } from './navbar/navbar.component';
   ]
 })
 export class LayoutModule {
-  
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: LayoutModule,
+      providers: []
+    }
+  }
 }
