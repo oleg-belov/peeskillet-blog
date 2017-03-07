@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from '../layout';
 import { PagesModule } from '../pages';
 import { SharedModule } from '../shared';
+import { CoreModule } from '../core';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { SharedModule } from '../shared';
     HttpModule,
     LayoutModule.forRoot(),
     PagesModule.forRoot(),
-    SharedModule.forRoot()
+    SharedModule.forRoot(),
+    CoreModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
