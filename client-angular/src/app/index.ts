@@ -8,6 +8,18 @@ import { LayoutModule } from '../layout';
 import { PagesModule } from '../pages';
 import { SharedModule } from '../shared';
 import { CoreModule } from '../core';
+import { PostsModule } from '../posts';
+
+import { AppState } from './app.state';
+
+
+// ****************************
+// Development
+// ****************************
+import { DevModule } from '../dev';
+
+
+export { AppState };
 
 
 @NgModule({
@@ -21,7 +33,11 @@ import { CoreModule } from '../core';
     LayoutModule.forRoot(),
     PagesModule.forRoot(),
     SharedModule.forRoot(),
-    CoreModule.forRoot()
+    CoreModule.forRoot(),
+    PostsModule.forRoot(),
+
+    /* Development */
+    DevModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

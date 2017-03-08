@@ -1,0 +1,26 @@
+<div class="home-page-container">
+  <h2>Latest Posts</h2>
+
+  <div class="media post-partial" *ngFor="let post of post | async">
+
+    <img class="d-flex mr-3" [src]="post.author.avatar_url" alt="Author Img"/>
+
+    <div class="media-body">
+      <h4 class="post-title">{{ post.title }}</h4>
+      <div class="post-details">
+        <span class="post-author">
+          By
+          <a href="#">{{ post.author.username }}</a>
+        </span>
+        <span class="post-date">
+          <i class="fa fa-clock-o" aria-hidden="true"></i>
+          <span>{{ post.date_created }}</span>
+        </span>
+      </div>
+      <p class="post-snippet">{{ post.content | ellipsis:175 }}</p>
+      <div>
+        <a href="#">Read more...</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared';
 
 import { HomePageComponent } from './home/home-page.component';
 import { TagsPageComponent } from './tags/tags-page.component';
@@ -10,6 +11,7 @@ import { appRoutes } from './routes';
 
 @NgModule({
   imports: [
+    SharedModule,
     RouterModule.forRoot(appRoutes)
   ],
   declarations: [

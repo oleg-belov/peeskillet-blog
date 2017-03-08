@@ -23,6 +23,7 @@
     "@ngrx/core": "^1.2.0",
     "@ngrx/effects": "^2.0.0",
     "@ngrx/store": "^2.2.1",
+    "angular-in-memory-web-api": "^0.3.0",
     "core-js": "^2.4.1",
     "immutable": "^3.8.1",
     "normalizr": "^3.2.2",

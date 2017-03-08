@@ -4,7 +4,11 @@ import { Configuration } from './services/configuration';
 import { environment as env } from '../environments/environment';
 
 
-function configurationFactory() {
+export { Configuration };
+export { Selector } from './interfaces';
+
+
+export function configurationFactory() {
   return new Configuration()
     .setBaseApiUrl(env.baseApiUrl)
 }

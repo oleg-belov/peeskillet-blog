@@ -3,6 +3,8 @@ import 'rxjs/add/operator/map';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Http , Response} from '@angular/http';
 
+import { PostsActions, getPostsUrl } from '../posts';
+
 
 @Component({
   selector: 'app-root',
@@ -15,4 +17,9 @@ import { Http , Response} from '@angular/http';
 })
 export class AppComponent {
 
+  constructor(private postsActions: PostsActions) {}
+
+  ngOnInit() {
+    this.postsActions.fetchLatestPosts(getPostsUrl());
+  }
 }

@@ -3,12 +3,19 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { EllipsisPipe } from './pipes/ellipsis';
+
 
 @NgModule({
   exports: [
     FormsModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+
+    EllipsisPipe
+  ],
+  declarations: [
+    EllipsisPipe
   ]
 })
 export class SharedModule {
