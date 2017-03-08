@@ -23,7 +23,7 @@ public class DataGenerator {
     private static final String FILE = "src/main/resources/data.sql";
 
 
-    public static void main(String... args) throws Exception {
+    public static void generateData() throws Exception {
         try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(FILE)))) {
             printUsers(writer);
             writer.println();
