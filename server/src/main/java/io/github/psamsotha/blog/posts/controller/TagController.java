@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
@@ -37,7 +38,7 @@ public class TagController {
     }
 
 
-    @GetMapping
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<PagedResources<TagResource>> getTags(Pageable pageable,
                                                                PagedResourcesAssembler assembler) {
         Page<Tag> page = this.tagService.getTags(pageable);
@@ -46,7 +47,7 @@ public class TagController {
     }
 
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TagResource> createTag(Tag tag) {
         Tag created = this.tagService.createTag(tag);
         TagResource resource = this.tagAssembler.toResource(created);

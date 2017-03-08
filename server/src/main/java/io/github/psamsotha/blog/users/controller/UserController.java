@@ -21,8 +21,10 @@ import org.springframework.hateoas.PagedResources;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -57,7 +59,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/{userId}")
+    @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public ResponseEntity<UserResource> getUser(@PathVariable("userId") Long userId) {
         User user = this.userService.getById(userId);
         if (user == null) {
@@ -68,7 +70,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/{userId}/posts")
+    @RequestMapping(value = "/{userId}/posts", method = RequestMethod.GET)
     public ResponseEntity<PagedResources<PostResource>> getUserPosts(@PathVariable("userId") Long userId,
                                                                      Pageable pageable,
                                                                      PagedResourcesAssembler assembler) {
@@ -78,7 +80,7 @@ public class UserController {
         return ResponseEntity.ok(resource);
     }
 
-    @GetMapping("/{userId}/comments")
+    @RequestMapping(value = "/{userId}/comments", method = RequestMethod.GET)
     public ResponseEntity<PagedResources<CommentResource>> getUserComments(@PathVariable("userId") Long userId,
                                                                            Pageable pageable,
                                                                            PagedResourcesAssembler assembler) {

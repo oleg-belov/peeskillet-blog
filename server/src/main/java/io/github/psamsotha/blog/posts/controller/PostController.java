@@ -13,8 +13,10 @@ import org.springframework.hateoas.PagedResources;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
@@ -36,7 +38,7 @@ public class PostController {
         this.postAssembler = postAssembler;
     }
 
-    @GetMapping
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<PagedResources<PostResource>> getPosts(Pageable pageable,
                                                                  PagedResourcesAssembler assembler) {
 
@@ -45,7 +47,7 @@ public class PostController {
         return ResponseEntity.ok(resource);
     }
 
-    @GetMapping("{postId}")
+    @RequestMapping(value = "{postId}", method = RequestMethod.GET)
     public ResponseEntity<PostResource> getPost(@PathVariable("postId") Long postId) {
         Post post = this.postService.getById(postId);
         if (post == null) {

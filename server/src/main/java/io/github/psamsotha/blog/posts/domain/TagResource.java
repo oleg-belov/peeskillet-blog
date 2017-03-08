@@ -21,6 +21,10 @@ public class TagResource extends AbstractResource<TagResource> {
         return this;
     }
 
+    public long getPostCount() {
+        return this.postCount;
+    }
+
     public TagResource postCount(long postCount) {
         this.postCount = postCount;
         return this;
