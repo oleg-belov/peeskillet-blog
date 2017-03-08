@@ -1,5 +1,6 @@
 package io.github.psamsotha.blog.posts.controller;
 
+import io.github.psamsotha.blog.common.exception.NotFoundException;
 import io.github.psamsotha.blog.posts.domain.Tag;
 import io.github.psamsotha.blog.posts.domain.TagResource;
 import io.github.psamsotha.blog.posts.domain.TagResourceAssembler;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,6 +48,15 @@ public class TagController {
         return ResponseEntity.ok(resource);
     }
 
+    @RequestMapping(value = "/{tagId}", method = RequestMethod.GET)
+    public ResponseEntity<TagResource> getTag(@PathVariable("tagId") Long tagId) {
+        Tag tag = this.tagService.getById(tagId);
+        if (tag == null) {
+            throw new NotFoundException("Tag with id " + tagId + " not found.");
+        }
+        TagResource resource = this.tagAssembler.toResource(tag);
+        return ResponseEntity.ok(resource);
+    }
 
     @RequestMapping(method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TagResource> createTag(Tag tag) {

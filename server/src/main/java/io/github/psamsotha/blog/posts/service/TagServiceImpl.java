@@ -22,6 +22,11 @@ public class TagServiceImpl implements TagService {
     }
 
     @Override
+    public Tag getById(Long tagId) {
+        return this.tagRepository.findOne(tagId);
+    }
+
+    @Override
     public Page<Tag> getTags(Pageable pageable) {
         return this.tagRepository.findAll(pageable);
     }

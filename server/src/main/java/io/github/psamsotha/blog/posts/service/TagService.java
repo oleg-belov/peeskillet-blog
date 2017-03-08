@@ -9,6 +9,9 @@ import org.springframework.data.domain.Pageable;
  */
 public interface TagService {
 
+    Tag getById(Long tagId);
+
     Tag createTag(Tag tag);
+
     Page<Tag> getTags(Pageable pageable);
 }
