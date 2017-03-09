@@ -34,6 +34,8 @@ public class Post {
 
     @Column(length = 10_000)
     private String content;
+
+    private String title;
     private LocalDateTime dateCreated;
 
     @ManyToOne
@@ -60,6 +62,14 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public LocalDateTime getDateCreated() {

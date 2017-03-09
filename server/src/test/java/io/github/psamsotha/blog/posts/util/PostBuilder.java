@@ -16,6 +16,7 @@ public class PostBuilder {
 
     private Long id;
     private String content;
+    private String title;
     private LocalDateTime dateCreated;
     private User author;
     private List<Comment> comments;
@@ -29,6 +30,11 @@ public class PostBuilder {
 
     public PostBuilder content(String content) {
         this.content = content;
+        return this;
+    }
+
+    public PostBuilder title(String title) {
+        this.title = title;
         return this;
     }
 
@@ -62,6 +68,7 @@ public class PostBuilder {
         Post post = new Post();
         post.setId(this.id);
         post.setContent(this.content);
+        post.setTitle(this.title);
         post.setAuthor(this.author);
         post.setDateCreated(this.dateCreated);
         post.setComments(this.comments);

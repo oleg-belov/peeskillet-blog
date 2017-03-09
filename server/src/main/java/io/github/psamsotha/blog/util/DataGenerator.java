@@ -81,11 +81,26 @@ public class DataGenerator {
 
 
     private static final String POST_TMPL
-            = "insert into post (id, user_id, date_created, content) values ({1}, {2}, {3}, {4});";
+            = "insert into post (id, user_id, date_created, title, content) values ({1}, {2}, {3}, {4}, {5});";
+
+    private static final String[] POST_TITLES = {
+            "How the Grinch Stole The White House", "Getting Started with Angular",
+            "Getting Started with ReactJS", "Getting Started with Spring Boot",
+            "How to Turn Your Computer On", "How to Turn Your Computer Off",
+            "Why You Shouldnt Eat Laying Down", "How to Post on Stack Overflow",
+            "Why Angular Is So Cool", "How ReactJS Changed My Life",
+            "Why Waking Up at 5am is Awesome", "How use NgRx with Angular",
+            "Using Redux with React", "Getting Started with Jersey",
+            "Getting the Most Bang for Your Buck", "How to Convince Elon Musk to Take You to Mars",
+            "Vampires Originated From Aliens Mixing Human DNA with Mosquito DNA",
+            "Be Happy With What You Have, But Always Strive for More",
+            "How To Read 10 Books in 10 Days", "How to Create an Array in Java"
+    };
 
     private static final int POSTS_PER_USER = 10;
 
     private static void printPosts(PrintWriter writer) throws Exception {
+        final Random random = new Random();
         String row;
         String id;
         for (int i = 0; i < USERS.length; i++) {
@@ -97,7 +112,8 @@ public class DataGenerator {
                         .replaceFirst("\\{1\\}", String.valueOf(Integer.parseInt(id) + 1))
                         .replaceFirst("\\{2\\}", String.valueOf(i + 1))
                         .replaceFirst("\\{3\\}", "'" + LocalDateTime.now().toString().replace("T", " ") + "'")
-                        .replaceFirst("\\{4\\}", CONTENT);
+                        .replaceFirst("\\{4\\}", "'" + POST_TITLES[random.nextInt(POST_TITLES.length - 1)] + "'")
+                        .replaceFirst("\\{5\\}", CONTENT);
                 writer.println(row);
             }
         }

@@ -16,6 +16,7 @@ import java.util.List;
 public class PostResource extends AbstractResource<PostResource> {
 
     private String content;
+    private String title;
     private LocalDateTime dateCreated;
     private UserResource author;
     private List<TagResource> tags;
@@ -28,6 +29,15 @@ public class PostResource extends AbstractResource<PostResource> {
 
     public PostResource content(String content) {
         this.content = content;
+        return this;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public PostResource title(String title) {
+        this.title = title;
         return this;
     }
 

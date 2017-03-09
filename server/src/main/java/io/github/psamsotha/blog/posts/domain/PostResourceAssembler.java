@@ -36,6 +36,7 @@ public class PostResourceAssembler extends ResourceAssemblerSupport<Post, PostRe
     public PostResource toResource(Post post) {
         return createResourceWithId(post.getId(), post)
                 .content(post.getContent())
+                .title(post.getTitle())
                 .dateCreated(post.getDateCreated())
                 .author(createUserResource(post.getAuthor()))
                 .tags(createTagResources(post.getTags()))
@@ -45,6 +46,7 @@ public class PostResourceAssembler extends ResourceAssemblerSupport<Post, PostRe
     private UserResource createUserResource(User user) {
         return new UserResource()
                 .username(user.getUsername())
+                .avatarUrl(user.getAvatarUrl())
                 .addLink(linkTo(methodOn(UserController.class)
                         .getUser(user.getId())).withRel(Link.REL_SELF));
     }
