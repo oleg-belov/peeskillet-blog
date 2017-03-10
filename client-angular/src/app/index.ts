@@ -11,6 +11,7 @@ import { PagesModule } from '../pages';
 import { SharedModule } from '../shared';
 import { PostsModule } from '../posts';
 import { CoreModule } from '../core';
+import { BootstrapModule } from '../shared/bootstrap';
 
 import { postsReducer, commentsReducer, tagsReducer } from '../posts';
 import { usersReducer } from '../users';
@@ -32,6 +33,7 @@ export { AppState };
     SharedModule.forRoot(),
     PostsModule.forRoot(),
     CoreModule.forRoot(),
+    BootstrapModule.forRoot(),
 
     StoreModule.provideStore({
       // data

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { EllipsisPipe } from './pipes/ellipsis';
+import { BootstrapModule } from './bootstrap';
 
 
 export { EllipsisPipe };
@@ -15,7 +16,8 @@ export { EllipsisPipe };
     CommonModule,
     RouterModule,
 
-    EllipsisPipe
+    EllipsisPipe,
+    BootstrapModule
   ],
   declarations: [
     EllipsisPipe

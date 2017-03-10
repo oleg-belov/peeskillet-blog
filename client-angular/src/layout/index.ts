@@ -1,10 +1,9 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-
-import { SharedModule } from '../shared';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SharedModule } from '../shared';
 
 
-@NgModule ({
+@NgModule({
   imports: [
     SharedModule
   ],
