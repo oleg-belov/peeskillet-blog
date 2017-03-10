@@ -1,7 +1,7 @@
 import { Map, Record } from 'immutable';
-import { CommentData } from './comment';
-import { TagData } from './tag';
+import { TagData } from '../../tags';
 import { UserData } from '../../users';
+import { CommentData } from '../../comments';
 import { getSelfLink, extractIds } from '../../util';
 
 

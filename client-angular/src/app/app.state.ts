@@ -1,4 +1,6 @@
-import { PostsState, CommentsState, TagsState } from '../posts';
+import { PostsState } from '../posts';
+import { CommentsState } from '../comments';
+import { TagsState } from '../tags';
 import { UsersState } from '../users';
 
 

@@ -1,8 +1,7 @@
 import { Map } from 'immutable';
 import { tagsReducer } from './tags.reducer';
-import { PostsActions } from '../posts.actions';
-import { PostsData } from '../model/post';
-import { postsData } from '../../testing'
+import { postsData } from '../../testing';
+import { PostsActions, PostsData } from '../../posts';
 
 
 describe('posts', () => {

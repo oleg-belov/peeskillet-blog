@@ -13,7 +13,9 @@ import { PostsModule } from '../posts';
 import { CoreModule } from '../core';
 import { BootstrapModule } from '../shared/bootstrap';
 
-import { postsReducer, commentsReducer, tagsReducer } from '../posts';
+import { postsReducer } from '../posts';
+import { commentsReducer } from '../comments';
+import { tagsReducer } from '../tags';
 import { usersReducer } from '../users';
 
 

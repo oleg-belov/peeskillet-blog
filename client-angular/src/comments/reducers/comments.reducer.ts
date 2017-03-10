@@ -1,7 +1,7 @@
 import { Map } from 'immutable';
 import { Action, ActionReducer } from '@ngrx/store';
-import { PostsActions, FetchLatestPostsSucessAction } from '../posts.actions';
 import { createComment } from '../model/comment';
+import { PostsActions, FetchLatestPostsSucessAction } from '../../posts';
 import { getSelfLink } from '../../util';
 
 

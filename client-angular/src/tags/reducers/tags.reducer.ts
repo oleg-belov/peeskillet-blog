@@ -1,8 +1,8 @@
 import { Map } from 'immutable';
-import { ActionReducer, Action } from '@ngrx/store';
-import { PostsActions, FetchLatestPostsSucessAction } from '../posts.actions';
+import { Action } from '@ngrx/store';
 import { createTag } from '../model/tag';
 import { getSelfLink } from '../../util';
+import { PostsActions, FetchLatestPostsSucessAction } from '../../posts';
 
 
 export type TagsState = Map<any, any>;
