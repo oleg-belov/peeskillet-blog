@@ -2,21 +2,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { StoreModule } from '@ngrx/store';
 
+import { AppState } from './app.state';
 import { AppComponent } from './app.component';
 import { LayoutModule } from '../layout';
 import { PagesModule } from '../pages';
 import { SharedModule } from '../shared';
-import { CoreModule } from '../core';
 import { PostsModule } from '../posts';
+import { CoreModule } from '../core';
 
-import { AppState } from './app.state';
-
-
-// ****************************
-// Development
-// ****************************
-import { DevModule } from '../dev';
+import { postsReducer, commentsReducer, tagsReducer } from '../posts';
+import { usersReducer } from '../users';
 
 
 export { AppState };
@@ -33,11 +30,18 @@ export { AppState };
     LayoutModule.forRoot(),
     PagesModule.forRoot(),
     SharedModule.forRoot(),
-    CoreModule.forRoot(),
     PostsModule.forRoot(),
+    CoreModule.forRoot(),
 
-    /* Development */
-    DevModule.forRoot()
+    StoreModule.provideStore({
+      // data
+      users: usersReducer,
+      posts: postsReducer,
+      comments: commentsReducer,
+      tags: tagsReducer
+
+      // ui
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

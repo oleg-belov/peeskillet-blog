@@ -3,11 +3,11 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 import { Selector } from '../../core';
 import { AppState } from '../../app';
-import { PostsState } from './posts.reducer';
+import { UsersState } from './users.reducer';
 
 
-export function getPosts(): Selector<AppState, PostsState> {
+export function getUsers(): Selector<AppState, UsersState> {
   return state$ => state$
-    .map(state => state.posts)
+    .map(state => state.users)
     .distinctUntilChanged();
 }

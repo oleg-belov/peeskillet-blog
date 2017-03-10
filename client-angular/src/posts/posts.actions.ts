@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
+import { PostsData } from './model/post';
 
 
 @Injectable()
@@ -9,14 +10,14 @@ export class PostsActions {
   static readonly FETCH_LATEST_POSTS_FAILED = 'FETCH_LATEST_POSTS_FAILED';
 
 
-  fetchLatestPosts(postsUrl): FetchLatesPostsAction {
+  fetchLatestPosts(postsUrl): FetchLatestPostsAction {
     return {
       type: PostsActions.FETCH_LATEST_POSTS,
-      paylaod: { postsUrl }
+      payload: { postsUrl }
     };
   }
 
-  fetchLatesPostsSuccess(postsData: any): FetchLatestPostsSucessAction {
+  fetchLatestPostsSuccess(postsData: any): FetchLatestPostsSucessAction {
     return {
       type: PostsActions.FETCH_LATEST_POSTS_SUCCESS,
       payload: { postsData }
@@ -31,14 +32,14 @@ export class PostsActions {
   }
 }
 
-export interface FetchLatesPostsAction extends Action {
-  paylaod: {
+export interface FetchLatestPostsAction extends Action {
+  payload: {
     postsUrl: string;
   }
 }
 
 export interface FetchLatestPostsSucessAction extends Action {
   payload: {
-    postsData: any
+    postsData: PostsData
   }
 }

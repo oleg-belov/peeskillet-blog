@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 import { PostsService } from './posts.service';
 import { PostsActions } from './posts.actions';
-import { getPosts } from './reducers/selectors';
+import { getPosts } from './reducers/posts.selectors';
 import { AppState } from '../app';
 
 
@@ -33,6 +33,6 @@ export class PostsEffects {
     }))
     .filter(({posts}) => !posts.get('hasLoadedLatest'))
     .switchMap(({payload}) => this.postsService.fetchPosts(payload.postsUrl)
-      .map(data => this.actions.fetchLatesPostsSuccess(data))
+      .map(data => this.actions.fetchLatestPostsSuccess(data))
       .catch(error => Observable.of(this.actions.fetchLatestPostsFailed(error))));
 }

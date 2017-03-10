@@ -6,6 +6,9 @@ import { RouterModule } from '@angular/router';
 import { EllipsisPipe } from './pipes/ellipsis';
 
 
+export { EllipsisPipe };
+
+
 @NgModule({
   exports: [
     FormsModule,

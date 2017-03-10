@@ -1,9 +1,9 @@
 <div class="home-page-container">
   <h2>Latest Posts</h2>
 
-  <div class="media post-partial" *ngFor="let post of post | async">
+  <div class="media post-partial" *ngFor="let post of posts$ | async">
 
-    <img class="d-flex mr-3" [src]="post.author.avatar_url" alt="Author Img"/>
+    <img class="d-flex mr-3" [src]="post.author.avatarUrl" alt="Author Img"/>
 
     <div class="media-body">
       <h4 class="post-title">{{ post.title }}</h4>
@@ -14,7 +14,7 @@
         </span>
         <span class="post-date">
           <i class="fa fa-clock-o" aria-hidden="true"></i>
-          <span>{{ post.date_created }}</span>
+          <span>{{ post.dateCreated | date:'medium' }}</span>
         </span>
       </div>
       <p class="post-snippet">{{ post.content | ellipsis:175 }}</p>

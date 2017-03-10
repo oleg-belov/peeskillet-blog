@@ -1,31 +1,39 @@
 import { Map, Record } from 'immutable';
-import { UserData } from '../../user';
+import { UserData } from '../../users';
+import { getSelfLink } from '../../util';
 
 
 export interface CommentData {
-  id: number;
   content: string;
+  dateCreated: string;
   author: UserData;
+  _links: {
+    self: { href: string };
+  };
 }
+
 
 export interface Comment extends Map<string, any> {
   id: number;
   content: string;
-  author: string;
+  dateCreated: Date;
+  authorId: string;
 }
 
 export const CommentRecord = Record({
   id: -1,
   content: null,
-  author: null
+  dateCreated: null,
+  authorId: null
 });
 
 export function createComment(data: CommentData): Comment {
   return new CommentRecord({
 
-    id: data.id,
+    id: getSelfLink(data),
     content: data.content,
-    author: data.author.username
+    dateCreated: new Date(data.dateCreated),
+    authorId: getSelfLink(data.author)
 
   }) as Comment;
 }

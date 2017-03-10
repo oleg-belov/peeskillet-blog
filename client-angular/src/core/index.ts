@@ -1,10 +1,10 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-
 import { Configuration } from './services/configuration';
 import { environment as env } from '../environments/environment';
 
 
 export { Configuration };
+export { Pagination, PaginationRecord, createPagination } from './model/pagination';
 export { Selector } from './interfaces';
 
 

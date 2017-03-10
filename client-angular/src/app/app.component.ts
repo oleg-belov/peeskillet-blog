@@ -2,8 +2,11 @@ import 'rxjs/add/operator/map';
 
 import { Component, ViewEncapsulation } from '@angular/core';
 import { Http , Response} from '@angular/http';
+import { Store } from '@ngrx/store';
 
 import { PostsActions, getPostsUrl } from '../posts';
+import { Configuration } from '../core';
+import { AppState } from './app.state';
 
 
 @Component({
@@ -17,9 +20,11 @@ import { PostsActions, getPostsUrl } from '../posts';
 })
 export class AppComponent {
 
-  constructor(private postsActions: PostsActions) {}
+  constructor(private postsActions: PostsActions,
+              private store$: Store<AppState>,
+              private config: Configuration) {}
 
   ngOnInit() {
-    this.postsActions.fetchLatestPosts(getPostsUrl());
+    this.store$.dispatch(this.postsActions.fetchLatestPosts(`${getPostsUrl(this.config)}?page=0&size=5`));
   }
 }

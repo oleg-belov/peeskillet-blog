@@ -1,12 +1,14 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/let';
+import 'rxjs/add/observable/combineLatest';
 
 import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AppState } from '../../app';
-import { PostsActions, getPosts } from '../../posts';
+import { PostsActions, getLatestPosts } from '../../posts';
+import { getUsers } from '../../users';
 
 
 @Component({
@@ -21,7 +23,15 @@ export class HomePageComponent {
               private store$: Store<AppState>) {}
 
   ngOnInit() {
-    this.posts$ = this.store$
-      .let(getPosts());
+    this.posts$ = Observable.combineLatest(
+      this.store$.let(getLatestPosts()),
+      this.store$.let(getUsers()),
+      (posts, users: any) => {
+        posts.forEach(post => {
+          post.author = users.get(post.authorId)
+        })
+        return posts;
+      }
+    )
   }
 }
