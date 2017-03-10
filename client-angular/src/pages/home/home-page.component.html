@@ -10,7 +10,7 @@
       <div class="post-details">
         <span class="post-author">
           By
-          <a href="#">{{ post.author.username }}</a>
+          <a [routerLink]="['/profile', post.author.username]">{{ post.author.username }}</a>
         </span>
         <span class="post-date">
           <i class="fa fa-clock-o" aria-hidden="true"></i>
