@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.web.filter.ShallowEtagHeaderFilter;
 
 /**
  * @author Paul Samsotha.
@@ -40,5 +42,12 @@ public class PeeskilletBlogApplication {
 
                 .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                 .registerModule(new JavaTimeModule());
+    }
+
+    @Bean
+    public FilterRegistrationBean etagFilter() {
+        FilterRegistrationBean filter = new FilterRegistrationBean();
+        filter.setFilter(new ShallowEtagHeaderFilter());
+        return filter;
     }
 }
