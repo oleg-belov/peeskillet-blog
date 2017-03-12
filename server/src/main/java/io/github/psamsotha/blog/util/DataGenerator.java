@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 /**
@@ -72,7 +73,7 @@ public class DataGenerator {
                     .replaceFirst("\\{3\\}", "'" + user[1] + "'")
                     .replaceFirst("\\{4\\}", "'secret'")
                     .replaceFirst("\\{5\\}", "'" + user[2] + "'")
-                    .replaceFirst("\\{6\\}", "'" + LocalDateTime.now().toString().replace("T", " ") + "'")
+                    .replaceFirst("\\{6\\}", "'" + getRandomDate() + "'")
                     .replaceFirst("\\{7\\}", "'" + user[1] + "@email.com'")
                     .replaceFirst("\\{8\\}", "'http://lorempixel.com/200/200/people/" + counter + "'");
             writer.println(row);
@@ -111,7 +112,7 @@ public class DataGenerator {
                 row = POST_TMPL
                         .replaceFirst("\\{1\\}", String.valueOf(Integer.parseInt(id) + 1))
                         .replaceFirst("\\{2\\}", String.valueOf(i + 1))
-                        .replaceFirst("\\{3\\}", "'" + LocalDateTime.now().toString().replace("T", " ") + "'")
+                        .replaceFirst("\\{3\\}", "'" + getRandomDate() + "'")
                         .replaceFirst("\\{4\\}", "'" + POST_TITLES[random.nextInt(POST_TITLES.length - 1)] + "'")
                         .replaceFirst("\\{5\\}", CONTENT);
                 writer.println(row);
@@ -145,7 +146,7 @@ public class DataGenerator {
                                 : String.valueOf(i) + String.valueOf(j);
                 row = COMMENT_TMPL
                         .replaceFirst("\\{1\\}", id)
-                        .replaceFirst("\\{2\\}", "'" + LocalDateTime.now().toString().replace("T", " ") + "'")
+                        .replaceFirst("\\{2\\}", "'" + getRandomDate() + "'")
                         .replaceFirst("\\{3\\}", String.valueOf(j))
                         .replaceFirst("\\{4\\}", String.valueOf(random.nextInt(9) + 1))
                         .replaceFirst("\\{5\\}", "'" + comments[random.nextInt(comments.length - 1)] + "'");
@@ -227,6 +228,15 @@ public class DataGenerator {
                     .replaceFirst("\\{2\\}", row[1]));
 
         }
+    }
+
+    private static String getRandomDate() {
+        return LocalDateTime.now()
+                .minusDays(ThreadLocalRandom.current().nextInt(365))
+                .minusHours(ThreadLocalRandom.current().nextInt(24))
+                .minusMinutes(ThreadLocalRandom.current().nextInt(60))
+                .minusSeconds(ThreadLocalRandom.current().nextInt(60))
+                .toString().replace("T", " ");
     }
 
     private static final String CONTENT
