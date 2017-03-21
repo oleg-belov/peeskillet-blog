@@ -2,7 +2,8 @@ import { Map, Record } from 'immutable';
 import { TagData } from '../../tags';
 import { UserData } from '../../users';
 import { CommentData } from '../../comments';
-import { getSelfLink, extractIds } from '../../util';
+import { PagedData } from '../../shared/pagination';
+import { getSelfLink, extractIds, idFromSelfLink } from '../../util';
 
 
 export interface PostData {
@@ -17,27 +18,15 @@ export interface PostData {
   };
 }
 
-export interface PostsData {
+export interface PostsData extends PagedData {
   _embedded: {
     posts: PostData[]
-  },
-  _links: {
-    first: { href: string; };
-    self: { href: string; };
-    last: { href: string };
-    prev?: { href: string };
-    next?: { href: string; };
-  },
-  page: {
-    size: number;
-    totalElements: number;
-    totalPages: number;
-    number: number;
   }
 }
 
 export interface Post extends Map<string, any> {
   id: string;
+  idNumber: number;
   dateCreated: Date;
   title: string;
   content: string;
@@ -48,6 +37,7 @@ export interface Post extends Map<string, any> {
 
 export const PostRecord = Record({
   id: null,
+  idNumber: -1,
   dateCreated: null,
   title: null,
   content: null,
@@ -60,6 +50,7 @@ export function createPost(data: PostData): Post {
   return new PostRecord({
 
     id: getSelfLink(data),
+    idNumber: idFromSelfLink(getSelfLink(data)),
     dateCreated: new Date(data.dateCreated),
     title: data.title,
     content: data.content,

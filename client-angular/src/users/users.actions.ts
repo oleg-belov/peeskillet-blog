@@ -12,14 +12,14 @@ export class UsersActions {
   static readonly LOAD_USER = 'LOAD_USER';
 
 
-  fetchUser(userUrl: string): FetchUserAction {
+  fetchUser(userUrl: string): Action {
     return {
       type: UsersActions.FETCH_USER,
       payload: { userUrl }
     }
   }
 
-  fetchUserSuccess(userData: UserData): FetchUserSuccessAction {
+  fetchUserSuccess(userData: UserData): Action {
     return {
       type: UsersActions.FETCH_USER_SUCCESS,
       payload: {
@@ -35,16 +35,4 @@ export class UsersActions {
     }
   }
 
-}
-
-export interface FetchUserAction extends Action {
-  payload: {
-    userUrl: string;
-  }
-}
-
-export interface FetchUserSuccessAction extends Action {
-  payload: {
-    userData: UserData
-  }
 }

@@ -2,7 +2,7 @@ import { Map } from 'immutable';
 import { Action } from '@ngrx/store';
 import { createTag } from '../model/tag';
 import { getSelfLink } from '../../util';
-import { PostsActions, FetchLatestPostsSucessAction } from '../../posts';
+import { PostsActions } from '../../posts';
 
 
 export type TagsState = Map<any, any>;
@@ -10,18 +10,20 @@ export type TagsState = Map<any, any>;
 export const initialStatate = Map();
 
 
-export function tagsReducer(state = initialStatate, action: Action): TagsState {
+export function tagsReducer(state = initialStatate, {payload, type}: Action): TagsState {
 
-  switch (action.type) {
+  switch (type) {
     case PostsActions.FETCH_LATEST_POSTS_SUCCESS:
-      return state.merge(extractPostsTags(state, action));
+      if (!payload.postsData) {
+        return state;
+      }
+      return state.merge(extractPostsTags(state, payload));
     default:
       return state;
   }
 }
 
-function extractPostsTags(state, action: Action): Map<any, any> {
-  const { payload } = <FetchLatestPostsSucessAction>action;
+function extractPostsTags(state, payload): Map<any, any> {
   const { postsData } = payload;
 
   return Map().withMutations(map => {

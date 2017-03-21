@@ -1,7 +1,7 @@
 import { Map } from 'immutable';
 import { Action, ActionReducer } from '@ngrx/store';
 import { createComment } from '../model/comment';
-import { PostsActions, FetchLatestPostsSucessAction } from '../../posts';
+import { PostsActions } from '../../posts';
 import { getSelfLink } from '../../util';
 
 
@@ -10,18 +10,20 @@ export type CommentsState = Map<any, any>;
 export const initialState = Map();
 
 
-export function commentsReducer(state = initialState, action: Action): CommentsState {
-
-  switch (action.type) {
+export function commentsReducer(state = initialState, {payload, type}: Action): CommentsState {
+ 
+  switch (type) {
     case PostsActions.FETCH_LATEST_POSTS_SUCCESS:
-      return state.merge(extractPostsComments(state, action))
+      if (!payload.postsData) {
+        return state;
+      }
+      return state.merge(extractPostsComments(state, payload))
     default:
       return state;
   }
 }
 
-function extractPostsComments(state, action: Action): Map<any, any> {
-  const { payload } = <FetchLatestPostsSucessAction>action;
+function extractPostsComments(state, payload): Map<any, any> {
   const { postsData } = payload;
 
   return Map().withMutations(map => {

@@ -1,11 +1,15 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/let';
+import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/distinctUntilChanged';
 
+import { List } from 'immutable';
 import { Selector } from '../../core';
 import { AppState } from '../../app';
 import { PostsState } from './posts.reducer';
+import { Post } from '../model/post';
 
 
 export function getPosts(): Selector<AppState, PostsState> {
@@ -14,13 +18,18 @@ export function getPosts(): Selector<AppState, PostsState> {
     .distinctUntilChanged();
 }
 
-export function getLatestPosts(amount = 5): Selector<AppState, any> {
+export function getCurrentPage(): Selector<AppState, string> {
   return state$ => state$
     .let(getPosts())
-    .map(state => {
-      const sorted = state
-        .filter((val, key) => key !== 'isFetching' && key !== 'hasLoadedLatest')
-        .sort((postA, postB) => postA.createdDate - postB.createdDate);
-      return Array.from(<any>sorted.values()).slice(0, amount)
+    .map(posts => `${posts.get('currentPage')}`)
+    .distinctUntilChanged();
+}
+
+export function getLatestPosts(): Selector<AppState, List<Post>> {
+  return state$ => state$
+    .let(getCurrentPage())
+    .withLatestFrom(state$.let(getPosts()), (currentPage, posts) => {
+      return posts.get('pagedPostIds').get(currentPage)
+        .map(id => posts.get(id)) as List<Post>;
     });
 }

@@ -1,2 +1,2 @@
 
-export { getLink, getSelfLink, extractIds } from './helpers';
+export { getLink, getSelfLink, extractIds, idFromSelfLink } from './helpers';

@@ -11,7 +11,7 @@ import { postsReducer } from './reducers/posts.reducer';
 import { PostsService, getPostsUrl } from './posts.service';
 import { HttpTestingModule, postsData } from '../testing';
 
-
+/*
 describe('posts', () => {
   describe('PostsEffects', () => {
     let effects: PostsEffects;
@@ -67,3 +67,4 @@ describe('posts', () => {
     }
   });
 });
+*/

@@ -57,8 +57,8 @@ public class DataGenerator {
             {"Steph Curry", "babayface", "Oakland, CA"},
             {"Kevin Durant", "durantula", "Oakland, CA"},
             {"Klay Thompson", "splashbro", "Oakland, CA"},
-            {"Micheal Jordan", "thegoat", "Chicago, CA"},
-            {"James Harden", "thebeard", "Houston, CA"},
+            {"Micheal Jordan", "thegoat", "Chicago, IL"},
+            {"James Harden", "thebeard", "Houston, "},
             {"Shaquille Oneal", "shaqdiesel", "Orlando, FL"},
             {"Vince Carter", "halfamazing", "Toronto, CN"}
     };

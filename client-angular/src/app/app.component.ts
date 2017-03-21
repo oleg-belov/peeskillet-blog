@@ -25,6 +25,6 @@ export class AppComponent {
               private config: Configuration) {}
 
   ngOnInit() {
-    this.store$.dispatch(this.postsActions.fetchLatestPosts(`${getPostsUrl(this.config)}?page=0&size=5`));
+    // this.store$.dispatch(this.postsActions.fetchLatestPosts(1));
   }
 }

@@ -1,0 +1,24 @@
+<div class="post-preview media">
+
+  <img class="d-flex mr-3" [src]="user?.avatarUrl" alt="Author Img" />
+  <div class="media-body">
+    <h4 class="post-title clickable" [routerLink]="['/posts', post.idNumber]">{{ post.title }}</h4>
+    <div class="post-details">
+      <span class="post-author">
+          By
+          <a [routerLink]="['/profile', user ? user.username : '']">
+            {{ user?.username }}
+          </a>
+        </span>
+      <span class="post-date">
+        <i class="fa fa-clock-o" aria-hidden="true"></i>
+        <span>{{ post.dateCreated | date:'medium' }}</span>
+      </span>
+    </div>
+    <p class="post-snippet">{{ post.content | ellipsis:175 }}</p>
+    <div>
+      <a [routerLink]="['/posts', post.idNumber]">Read more...</a>
+    </div>
+  </div>
+
+</div>

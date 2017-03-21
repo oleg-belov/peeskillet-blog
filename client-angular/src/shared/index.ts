@@ -5,6 +5,9 @@ import { RouterModule } from '@angular/router';
 
 import { EllipsisPipe } from './pipes/ellipsis';
 import { BootstrapModule } from './bootstrap';
+import { LoadingIndicatorComponent } from './components/loading-indicator';
+
+import { PaginationService } from './pagination';
 
 
 export { EllipsisPipe };
@@ -15,19 +18,23 @@ export { EllipsisPipe };
     FormsModule,
     CommonModule,
     RouterModule,
+    BootstrapModule,
 
     EllipsisPipe,
-    BootstrapModule
+    LoadingIndicatorComponent,
   ],
   declarations: [
-    EllipsisPipe
+    EllipsisPipe,
+    LoadingIndicatorComponent
   ]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: SharedModule,
-      providers: []
+      providers: [
+        PaginationService
+      ]
     }
   }
 }

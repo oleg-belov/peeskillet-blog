@@ -1,26 +1,24 @@
 <div class="home-page-container">
   <h2>Latest Posts</h2>
 
-  <div class="media post-partial" *ngFor="let post of posts$ | async">
+  <loading-indicator *ngIf="(posts.posts$ | async)?.isFetching">
+  </loading-indicator>
 
-    <img class="d-flex mr-3" [src]="post.author.avatarUrl" alt="Author Img"/>
+  <div class="posts-container" *ngIf="!(posts.posts$ | async)?.get('isFetching')">
+    <post-preview *ngFor="let post of posts.latestPosts$ | async"
+                  [post]="post" [user]="(users.users$ | async)?.get(post.authorId)">
+    </post-preview>
+  </div>
 
-    <div class="media-body">
-      <h4 class="post-title">{{ post.title }}</h4>
-      <div class="post-details">
-        <span class="post-author">
-          By
-          <a [routerLink]="['/profile', post.author.username]">{{ post.author.username }}</a>
-        </span>
-        <span class="post-date">
-          <i class="fa fa-clock-o" aria-hidden="true"></i>
-          <span>{{ post.dateCreated | date:'medium' }}</span>
-        </span>
-      </div>
-      <p class="post-snippet">{{ post.content | ellipsis:175 }}</p>
-      <div>
-        <a href="#">Read more...</a>
-      </div>
-    </div>
+  <div class="pagination-container"
+       *ngIf="!(posts.posts$ | async)?.get('isFetching')">
+    <ngb-pagination [page]="(posts.posts$ | async)?.get('currentPage') + 1"
+                    [disabled]="(posts.posts$ | async)?.get('isFetching')'"
+                    [pageSize]="(pagination.posts$ | async)?.get('pageSize')"
+                    [collectionSize]="(pagination.posts$ | async)?.get('totalElements')"
+                    [directionLinks]="true"
+                    [ellipses]="true" [maxSize]="5"
+                    (pageChange)="onPageChange($event)">
+    </ngb-pagination>
   </div>
 </div>

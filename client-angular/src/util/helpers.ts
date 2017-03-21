@@ -18,3 +18,7 @@ export function getLink(data: any, rel: string): string {
 export function extractIds(data: any, property: string): string[] {
   return data[property].map(item => getSelfLink(item))
 }
+
+export function idFromSelfLink(selfLink: string): number {
+  return parseInt(selfLink.substr(selfLink.lastIndexOf('/') + 1));
+}

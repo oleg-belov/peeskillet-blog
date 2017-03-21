@@ -10,17 +10,17 @@ export class PostsActions {
   static readonly FETCH_LATEST_POSTS_FAILED = 'FETCH_LATEST_POSTS_FAILED';
 
 
-  fetchLatestPosts(postsUrl): FetchLatestPostsAction {
+  fetchLatestPosts(page: number): Action{
     return {
       type: PostsActions.FETCH_LATEST_POSTS,
-      payload: { postsUrl }
+      payload: { page }
     };
   }
 
-  fetchLatestPostsSuccess(postsData: any): FetchLatestPostsSucessAction {
+  fetchLatestPostsSuccess(args: FetchLatestPostsSuccessArgs): Action {
     return {
       type: PostsActions.FETCH_LATEST_POSTS_SUCCESS,
-      payload: { postsData }
+      payload: Object.assign({}, args)
     };
   }
 
@@ -32,14 +32,9 @@ export class PostsActions {
   }
 }
 
-export interface FetchLatestPostsAction extends Action {
-  payload: {
-    postsUrl: string;
-  }
-}
-
-export interface FetchLatestPostsSucessAction extends Action {
-  payload: {
-    postsData: PostsData
-  }
+export interface FetchLatestPostsSuccessArgs {
+  postsData: PostsData,
+  page: number,
+  isNew: boolean,
+  isModified: boolean
 }

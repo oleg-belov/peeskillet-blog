@@ -3,7 +3,7 @@ import { commentsReducer } from './comments.reducer';
 import { postsData } from '../../testing';
 import { PostsData, PostsActions } from '../../posts';
 
-
+/*
 describe('posts', () => {
   describe('commentsReducer', () => {
     let postsActions: PostsActions;
@@ -35,3 +35,4 @@ describe('posts', () => {
     }
   });
 });
+*/

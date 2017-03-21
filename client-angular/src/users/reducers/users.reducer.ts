@@ -1,8 +1,9 @@
 import { Map } from 'immutable';
 import { Action, ActionReducer } from '@ngrx/store';
 import { UserData, UserRecord, User, createUser } from '../model/user';
-import { UsersActions, FetchUserAction, FetchUserSuccessAction } from '../users.actions';
-import { PostData, PostsActions, FetchLatestPostsSucessAction, CommentData } from '../../posts';
+import { UsersActions } from '../users.actions';
+import { PostData, PostsActions } from '../../posts';
+import { CommentData } from '../../comments';
 import { getSelfLink } from '../../util';
 
 
@@ -12,9 +13,9 @@ const initialState = Map<string, any>({
   currentUserId: null
 });
 
-export function usersReducer(state = initialState, action: Action): UsersState {
+export function usersReducer(state = initialState, {payload, type}: Action): UsersState {
 
-  switch (action.type) {
+  switch (type) {
     case UsersActions.FETCH_USER:
       return state;
     case UsersActions.FETCH_USER_SUCCESS:
@@ -22,13 +23,15 @@ export function usersReducer(state = initialState, action: Action): UsersState {
     case UsersActions.FETCH_USER_FAILED:
       return state;
     case PostsActions.FETCH_LATEST_POSTS_SUCCESS:
-      return state.merge(extractPostsUsers(state, action));
+      if (!payload.postsData) {
+        return state;
+      }
+      return state.merge(extractPostsUsers(state, payload));
     default: return state;
   }
 }
 
-function extractPostsUsers(state, action: Action): Map<any, any> {
-  const { payload } = <FetchLatestPostsSucessAction>action;
+function extractPostsUsers(state, payload): Map<any, any> {
   const { postsData } = payload;
 
   return Map().withMutations(map => {

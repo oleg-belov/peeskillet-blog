@@ -10,13 +10,14 @@ import { LayoutModule } from '../layout';
 import { PagesModule } from '../pages';
 import { SharedModule } from '../shared';
 import { PostsModule } from '../posts';
+import { UsersModule } from '../users';
 import { CoreModule } from '../core';
 import { BootstrapModule } from '../shared/bootstrap';
 
-import { postsReducer } from '../posts';
 import { commentsReducer } from '../comments';
 import { tagsReducer } from '../tags';
 import { usersReducer } from '../users';
+import { postsReducer } from '../posts';
 
 
 export { AppState };
@@ -35,6 +36,7 @@ export { AppState };
     SharedModule.forRoot(),
     PostsModule.forRoot(),
     CoreModule.forRoot(),
+    UsersModule.forRoot(),
     BootstrapModule.forRoot(),
 
     StoreModule.provideStore({
