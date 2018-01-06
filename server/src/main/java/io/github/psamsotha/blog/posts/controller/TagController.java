@@ -57,7 +57,7 @@ public class TagController {
         return ResponseEntity.ok(resource);
     }
 
-    @RequestMapping(method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TagResource> createTag(Tag tag) {
         Tag created = this.tagService.createTag(tag);
         TagResource resource = this.tagAssembler.toResource(created);

@@ -12,13 +12,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
+
 
 /**
  * @author Paul Samsotha.
  */
-@EnableJpaAuditing
 @SpringBootApplication
 public class PeeskilletBlogApplication {
 
