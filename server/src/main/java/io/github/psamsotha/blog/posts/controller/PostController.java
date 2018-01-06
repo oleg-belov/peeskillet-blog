@@ -1,9 +1,11 @@
 package io.github.psamsotha.blog.posts.controller;
 
 import io.github.psamsotha.blog.common.exception.NotFoundException;
+import io.github.psamsotha.blog.posts.domain.CommentResourceAssembler;
 import io.github.psamsotha.blog.posts.domain.Post;
 import io.github.psamsotha.blog.posts.domain.PostResource;
 import io.github.psamsotha.blog.posts.domain.PostResourceAssembler;
+import io.github.psamsotha.blog.posts.domain.TagResourceAssembler;
 import io.github.psamsotha.blog.posts.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,13 +31,13 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 public class PostController {
 
     private final PostService postService;
-    private final PostResourceAssembler postAssembler;
+    private final PostResourceAssembler postAssembler = new PostResourceAssembler(
+            new TagResourceAssembler(), new CommentResourceAssembler());
 
 
     @Autowired
-    public PostController(PostService postService, PostResourceAssembler postAssembler) {
+    public PostController(PostService postService) {
         this.postService = postService;
-        this.postAssembler = postAssembler;
     }
 
     @RequestMapping(method = RequestMethod.GET)

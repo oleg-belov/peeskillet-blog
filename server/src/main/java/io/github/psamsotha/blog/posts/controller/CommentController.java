@@ -8,8 +8,6 @@ import io.github.psamsotha.blog.posts.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,14 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class CommentController {
 
     private final CommentService commentService;
-    private final CommentResourceAssembler commentAssembler;
+    private final CommentResourceAssembler commentAssembler = new CommentResourceAssembler();
 
 
     @Autowired
-    public CommentController(CommentService commentService,
-                             CommentResourceAssembler commentAssembler) {
+    public CommentController(CommentService commentService) {
         this.commentService = commentService;
-        this.commentAssembler = commentAssembler;
     }
 
 

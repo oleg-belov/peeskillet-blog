@@ -30,13 +30,12 @@ import java.net.URI;
 public class TagController {
 
     private final TagService tagService;
-    private final TagResourceAssembler tagAssembler;
+    private final TagResourceAssembler tagAssembler = new TagResourceAssembler();
 
 
     @Autowired
-    public TagController(TagService tagService, TagResourceAssembler tagAssembler) {
+    public TagController(TagService tagService) {
         this.tagService = tagService;
-        this.tagAssembler = tagAssembler;
     }
 
 

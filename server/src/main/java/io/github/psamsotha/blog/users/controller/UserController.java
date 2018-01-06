@@ -7,6 +7,7 @@ import io.github.psamsotha.blog.posts.domain.CommentResourceAssembler;
 import io.github.psamsotha.blog.posts.domain.Post;
 import io.github.psamsotha.blog.posts.domain.PostResource;
 import io.github.psamsotha.blog.posts.domain.PostResourceAssembler;
+import io.github.psamsotha.blog.posts.domain.TagResourceAssembler;
 import io.github.psamsotha.blog.posts.service.CommentService;
 import io.github.psamsotha.blog.posts.service.PostService;
 import io.github.psamsotha.blog.users.domain.User;
@@ -34,30 +35,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
-
     private final UserService userService;
-    private final UserResourceAssembler userAssembler;
-    private final PostService postService;
+    private final UserResourceAssembler userAssembler = new UserResourceAssembler();
+    private final CommentResourceAssembler commentAssembler = new CommentResourceAssembler();
+    private final PostResourceAssembler postAssembler = new PostResourceAssembler(
+            new TagResourceAssembler(), commentAssembler);
+
     private final CommentService commentService;
-    private final PostResourceAssembler postAssembler;
-    private final CommentResourceAssembler commentAssembler;
+    private final PostService postService;
 
 
     @Autowired
     public UserController(UserService userService,
-                          UserResourceAssembler userAssembler,
                           PostService postService,
-                          PostResourceAssembler postAssembler,
-                          CommentService commentService,
-                          CommentResourceAssembler commentAssembler) {
+                          CommentService commentService) {
         this.userService = userService;
-        this.userAssembler = userAssembler;
         this.postService = postService;
-        this.postAssembler = postAssembler;
         this.commentService = commentService;
-        this.commentAssembler = commentAssembler;
     }
-
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public ResponseEntity<UserResource> getUser(@PathVariable("userId") Long userId) {
@@ -68,7 +63,6 @@ public class UserController {
         UserResource resource = this.userAssembler.toResource(user);
         return ResponseEntity.ok(resource);
     }
-
 
     @RequestMapping(value = "/{userId}/posts", method = RequestMethod.GET)
     public ResponseEntity<PagedResources<PostResource>> getUserPosts(@PathVariable("userId") Long userId,
