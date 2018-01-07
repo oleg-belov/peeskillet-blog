@@ -13,7 +13,7 @@
   <div class="pagination-container"
        *ngIf="!(posts.posts$ | async)?.get('isFetching')">
     <ngb-pagination [page]="(posts.posts$ | async)?.get('currentPage') + 1"
-                    [disabled]="(posts.posts$ | async)?.get('isFetching')'"
+                    [disabled]="(posts.posts$ | async)?.get('isFetching')"
                     [pageSize]="(pagination.posts$ | async)?.get('pageSize')"
                     [collectionSize]="(pagination.posts$ | async)?.get('totalElements')"
                     [directionLinks]="true"
